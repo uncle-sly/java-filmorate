@@ -15,7 +15,7 @@ FROM film;
 >#### все фильмы с рейтингом
 ```sql
 SELECT f."name" AS film,
-       fr.name AS rating
+       fr.name AS mpa
 FROM public.film f
          JOIN public.film_rating fr ON f.id = fr.id;
 ```

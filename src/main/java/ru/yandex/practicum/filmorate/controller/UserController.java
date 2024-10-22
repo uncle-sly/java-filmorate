@@ -54,9 +54,10 @@ public class UserController {
 
     //    добавление в друзья
     @PutMapping("{id}/friends/{friendId}")
-    public void addFriend(@PathVariable("id") long userId, @PathVariable("friendId") long friendId) {
+    public void addFriend(@PathVariable("id") long userId, @PathVariable("friendId") long friendId,
+                          @RequestParam(defaultValue = "false") boolean isConfirmed) {
         log.info("PUT /users/userId/friends/friendId --> Adding friend {} for user {} - started", friendId, userId);
-        service.addFriend(userId, friendId);
+        service.addFriend(userId, friendId, isConfirmed);
         log.info("PUT /users/userId/friends/friendId <-- Adding friend {} for user {} - ended", friendId, userId);
     }
 

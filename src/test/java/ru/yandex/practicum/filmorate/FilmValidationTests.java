@@ -1,14 +1,17 @@
 package ru.yandex.practicum.filmorate;
 
-import jakarta.validation.*;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.yandex.practicum.filmorate.model.Film;
-import ru.yandex.practicum.filmorate.repository.InMemoryFilmRepository;
+import ru.yandex.practicum.filmorate.repository.inMemory.InMemoryFilmRepository;
 
 import java.time.LocalDate;
 import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Валидационные тесты для Film")

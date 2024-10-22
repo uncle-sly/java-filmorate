@@ -1,9 +1,10 @@
-package ru.yandex.practicum.filmorate.repository;
+package ru.yandex.practicum.filmorate.repository.inMemory;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.repository.FilmRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ public class InMemoryFilmRepository implements FilmRepository {
     private final Map<Long, Set<User>> filmsLikes = new HashMap<>();
     private Long filmId = 0L;
 
-    public Optional<Film> get(Long filmId) {
+    public Optional<Film> get(long filmId) {
         return Optional.ofNullable(films.get(filmId));
     }
 
@@ -45,12 +46,13 @@ public class InMemoryFilmRepository implements FilmRepository {
         fLikes.add(user);
     }
 
-    public void deleteLike(Film film, User user) {
+    public boolean deleteLike(Film film, User user) {
 
         Set<User> fLikes = filmsLikes.computeIfAbsent(film.getId(), id -> new HashSet<>());
         if (!fLikes.isEmpty()) {
-            fLikes.remove(user);
+            return fLikes.remove(user);
         }
+        return false;
     }
 
     public List<Film> getPopular(long count) {
